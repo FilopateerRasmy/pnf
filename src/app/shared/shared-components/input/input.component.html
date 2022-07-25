@@ -1,0 +1,8 @@
+<span class="p-float-label p-input-icon-right w-full ">
+<input [type]="type"  [id]="id" [formControl]="control" pInputText class=" pr-0 py-2 w-full">
+<label [for]="for">{{label}}</label>
+</span>
+<ng-container *ngIf="control.errors && getField()?.touched">
+  <p *ngIf="getErrors('email')" class="pl-1  text-red-500 pt-2">Enter a valid email.</p>
+  <p *ngIf="getErrors('required')" class="pl-1 text-red-500 pt-2">{{label}} is required.</p>
+</ng-container>

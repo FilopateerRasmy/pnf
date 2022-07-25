@@ -1,31 +1,33 @@
-<section class="h-screen  grid grid-nogutter">
-<div class="login-logo col-8 surface-50">
-  <img src="/assets/login-v2.svg" class="max-w-full h-auto" alt="pnf login">
-</div>
-<div class="login col-4 pb-5 px-0  flex flex-column justify-content-center align-items-center">
-  <div class="flex flex-column justify-content-center align-items-start">
-    <h2 class="text-800 ">Welcome To PNF! 👋</h2>
-    <p class="text-600 py-4 ">Please sign-in to your account</p>
-<div class="field col-12 md:col-4 pl-0">
-  <span class="p-float-label p-input-icon-right">
-      <input type="text" id="inputtext-right" pInputText class="py-2">
-      <label for="inputtext-right">Email</label>
-  </span>
-</div>
-<div class="field col-12 md:col-4 pl-0">
-  <span class="p-float-label p-input-icon-right">
-      <i class="pi pi-spin pi-spinner"></i>
-      <input type="password" id="inputtext-right" pInputText class="py-2" >
-      <label for="inputtext-right">Password</label>
-  </span>
-</div>
+<p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
 
-<div class="field-checkbox">
-  <p-checkbox  [inputId]="'remember me'" name="remember me" value="true" ></p-checkbox>
-  <label [for]="'remember me'">Remember Me</label>
-</div>
-  <button pButton pRipple label="Sign in" class="w-full py-2"></button>
+<section class="h-screen  grid grid-nogutter justify-content-center xl:justify-content-start">
+  <div class="login-logo hidden xl:block   xl:col-8 surface-50  ">
+    <img src="/assets/login-v2.svg" class="max-w-full h-auto" alt="pnf login">
   </div>
-</div>
-</section>
+  <div class="login col-8   xl:col-3 pb-5 px-0   xl:pl-7 flex  flex-column justify-content-center align-items-center">
+    <!-- Login Form Start  -->
+    <form [formGroup]="loginForm" (ngSubmit)="submit()" class="w-full pt-8 flex flex-column justify-content-center align-items-center xl:align-items-start">
+      <h2 class="text-800">Welcome To PNF! 👋</h2>
+      <p class="text-600 py-4 ">Please sign-in to your account</p>
+      <div class="field col-12    pl-0">
 
+        <app-input id="email" for="email" [control]="email" label="Email"></app-input>
+
+      </div>
+      <div class="field col-12   pl-0">
+
+          <!-- <i class="pi pi-spin pi-spinner"></i> -->
+          <app-input type="password" id="password" for="password" [control]="password" label="Password"></app-input>
+
+
+      </div>
+
+      <div class="field-checkbox align-self-start">
+        <p-checkbox [inputId]="'remember me'" name="remember me" value="true"></p-checkbox>
+        <label [for]="'remember me'">Remember Me</label>
+      </div>
+      <button *ngIf="(loading | async)" pButton pRipple label="Loading" icon="pi pi-spin pi-spinner" [disabled]="loading" class="  w-full  py-2"></button>
+      <button *ngIf="!(loading | async)" pButton pRipple label="Sign in" [disabled]="loginForm.invalid" class="  w-full  py-2"></button>
+    </form>
+  </div>
+</section>
